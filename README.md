@@ -26,10 +26,34 @@ from jacobs_ladder import visualization
    ```zsh
    cd jacobs_ladder
    ```
+
 3. Install dependencies (if any):
    ```zsh
    pip install -r requirements.txt
    ```
+
+## Using in a Jupyter Environment
+
+To use this project in a Jupyter Notebook:
+
+1. (Optional) Clone the repository directly from a notebook cell:
+   ```python
+   # Clone the repository (run this in a notebook cell)
+   !git clone git@github.com:moses-kabungo/ml-jacobs-ladder-course.git
+   ```
+
+2. Install the requirements for the project:
+   ```zsh
+   pip install -r ml-jacobs-ladder-course/requirements.txt
+   ```
+
+3. In your notebook, import the visualization module as follows:
+   ```python
+   import jacobs_ladder.visualization as jvis
+   # Now you can use jvis.function_name()
+   ```
+
+4. Make sure your notebook's kernel is using the same Python environment where you installed the dependencies.
 
 ## License
 MIT

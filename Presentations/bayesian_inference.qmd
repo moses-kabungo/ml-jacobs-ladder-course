@@ -1,0 +1,139 @@
+---
+title: "Statistical Inference II — Bayesian Inference"
+author: "Moses Kabungo"
+date: today
+format: revealjs
+theme: simple
+toc: true
+---
+
+## Why This Matters
+
+- Data is limited or expensive to collect.
+- Prior domain knowledge can improve estimates.
+- We want probabilistic statements about parameters, not just point estimates.
+- Decision-making under uncertainty requires updating beliefs.
+
+---
+
+## Learning Outcomes
+
+By the end of this module, you should be able to:
+
+- Explain the relationship between priors, likelihoods and posteriors under Bayes’ theorem.  
+- Identify conjugate prior–likelihood pairs.  
+- Implement scripts to update and compute posterior distributions.  
+- Compare MLE vs MAP estimation.  
+- Construct and interpret credible intervals.  
+
+---
+
+## Bayes' Theorem
+
+\[
+P(A \mid B) = \frac{P(A \cap B)}{P(B)} 
+= \frac{P(B \mid A) P(A)}{P(B)}
+\]
+
+---
+
+## Extension to Bayesian Inference
+
+\[
+p(\theta \mid D) 
+= \frac{p(D \mid \theta)\,p(\theta)}{p(D)}
+\]
+
+- \(p(\theta)\): prior distribution  
+- \(p(D \mid \theta)\): likelihood  
+- \(p(D)\): evidence  
+- \(p(\theta \mid D)\): posterior  
+
+---
+
+## Conjugation
+
+- Property that allows updating distributions' hyperparameters easily.  
+- Prior and likelihood combine to produce posterior in the same family as the prior.  
+
+**Example: Beta–Binomial**
+
+\[
+\theta \sim \text{Beta}(\alpha, \beta), \quad
+k \mid \theta \sim \text{Binomial}(n, \theta)
+\]
+
+Posterior:
+
+\[
+\theta \mid k, n \sim \text{Beta}(\alpha + k, \beta + n - k)
+\]
+
+---
+
+## Conjugate Pairs
+
+| Prior | Likelihood | Posterior | Key Summaries |
+|-------|------------|------------|----------------|
+| \(\theta \sim \text{Beta}(\alpha,\beta)\) | \(k \sim \text{Binomial}(n,\theta)\) | \(\theta \sim \text{Beta}(\alpha+k, \beta+n-k)\) | \(\mathbb{E}[\theta] = \frac{\alpha+k}{\alpha+\beta+n}\) |
+| \(\lambda \sim \text{Gamma}(\alpha,\beta)\) | \(y_i \sim \text{Poisson}(\lambda)\) | \(\lambda \sim \text{Gamma}(\alpha+\sum y_i,\;\beta+n)\) | \(\mathbb{E}[\lambda] = \frac{\alpha+\sum y_i}{\beta+n}\) |
+| ... | ... | ... | ... |
+
+---
+
+## Case Study I — Email Marketing
+
+- **Scenario:** A company runs a campaign.  
+- Prior: \(\theta \sim \text{Beta}(2,8)\).  
+- Data: 50 emails, 15 opened.  
+- Posterior: \(\theta \sim \text{Beta}(17,43)\).  
+
+---
+
+## Posterior Summary
+
+- Posterior mean = 0.28 (up from 0.20 prior).  
+- Variance decreased: more certainty.  
+
+---
+
+## Case Study II — Campaign Continued
+
+- Posterior: \(\text{Beta}(17,43)\).  
+- Predict next 1,000 emails.  
+- With 99.9% confidence, at least 125 opens (\(12.5\%\)).  
+
+---
+
+## Case Study III — Leads & Conversion Rate
+
+- Model leads with Poisson–Gamma.  
+- Conversions with Binomial–Beta.  
+- Posterior predictive for conversions.  
+
+**Business Objective:**
+- Set KPI thresholds (50%, 80%, 95%, 99%).  
+- Plan budget using expected conversions & contingency from lower quantiles.  
+
+---
+
+## Expected Performance
+
+- Baseline: 31.6 conversions.  
+- 80% confidence: ≥26.  
+- 95% confidence: ≥22.  
+- 99% confidence: ≥18.  
+
+---
+
+## Strategic Recommendations
+
+- Resource allocation: plan for 32 conversions.  
+- Monitor performance bands:
+  - <22 = investigate
+  - 22–26 = moderate underperformance
+  - 26–31 = acceptable
+  - >32 = exceeding expectations
+- Risk management: contingency at 18 conversions.  
+
+---

@@ -5,6 +5,8 @@ This repository contains code and resources for the Jacobs Ladder Machine Learni
 ## Structure
 - `visualization.py`: Contains visualization utilities and functions.
 - `__init__.py`: Marks the directory as a Python package.
+- `Presentations/`: Contains course presentation materials in Quarto format (.qmd files).
+  - `bayesian_inference.qmd`: Statistical Inference II — Bayesian Inference presentation.
 
 ## Usage
 Import the modules as needed in your projects or notebooks. For example:
@@ -15,6 +17,7 @@ from jacobs_ladder import visualization
 
 ## Requirements
 - Python 3.12 or higher
+- Quarto (for rendering presentation slides)
 - (Add any additional dependencies here)
 
 ## Getting Started
@@ -54,6 +57,24 @@ To use this project in a Jupyter Notebook:
    ```
 
 4. Make sure your notebook's kernel is using the same Python environment where you installed the dependencies.
+
+## Presentations
+
+The `Presentations/` folder contains course materials in Quarto format:
+
+- **Bayesian Inference**: Statistical inference using Bayesian methods, covering priors, posteriors, conjugate pairs, and practical applications in email marketing and conversion analysis.
+
+To render presentations:
+```zsh
+# Install Quarto if you haven't already
+# Visit: https://quarto.org/docs/get-started/
+
+# Render a specific presentation
+quarto render Presentations/bayesian_inference.qmd
+
+# Preview with live reload
+quarto preview Presentations/bayesian_inference.qmd
+```
 
 ## License
 MIT

@@ -1,3 +1,30 @@
+"""
+Marketing KPIs Module
+
+This module provides functions for computing marketing Key Performance Indicators (KPIs)
+using Bayesian statistical methods. It implements pooled Bayesian models for estimating
+lead generation and conversion rates, enabling data-driven marketing decisions with
+uncertainty quantification.
+
+Key Features:
+- Bayesian lead and conversion rate estimation
+- Monte Carlo simulation for posterior predictive distributions
+- Confidence-based KPI threshold computation
+- Support for custom priors and historical data integration
+
+Functions:
+- compute_lower_q_proba: Compute quantile thresholds for conversion targets
+- estimate_lead_conversions_kpi: Main function for KPI estimation using pooled Bayesian model
+
+Dependencies:
+- numpy: Numerical computations
+- pandas: Data manipulation and analysis
+- scipy.stats: Statistical distributions (beta, betabinom, gamma)
+
+Author: Moses Kabungo
+Date: September 2025
+"""
+
 import numpy as np
 import pandas as pd
 from scipy.stats import beta, betabinom, gamma
@@ -14,7 +41,7 @@ def compute_lower_q_proba(q: float, n_new, alpha_past, beta_past):
 
 def estimate_lead_conversions_kpi(
     csv_url: str,
-    q: list[float] = [0.5, 0.8, 0.95, 0.99],
+    q: list[float] = None,
     n_sim: int = 100_000,
     priors: dict = None,
     random_state: int = 0,
@@ -29,7 +56,7 @@ def estimate_lead_conversions_kpi(
             - 'Month' (string, optional, for reference only)
         q (list[float], optional): Quantiles to compute for KPI thresholds.
             Represents the probability that conversions meet or exceed the target.
-            Defaults to [0.5, 0.8, 0.95, 0.99].
+            Defaults to [0.5, 0.8, 0.95, 0.99] if the parameter was not specified..
         n_sim (int, optional): Number of Monte Carlo simulations. Default = 100,000.
         priors (dict, optional): Hyperparameters for priors.
             Keys:
@@ -53,6 +80,9 @@ def estimate_lead_conversions_kpi(
 
     # --- Load and Validate Data ---
     data = pd.read_csv(csv_url)
+
+    if priors is None:
+        priors = [0.5, 0.8, 0.95, 0.99]
 
     # Check required columns
     required_cols = {"Leads", "Conversions"}

@@ -4,6 +4,7 @@ This repository contains code and resources for the Jacobs Ladder Machine Learni
 
 ## Structure
 - `visualization.py`: Contains visualization utilities and functions.
+- `marketing_kpis.py`: Bayesian marketing KPI estimation functions for lead generation and conversion analysis.
 - `__init__.py`: Marks the directory as a Python package.
 - `Presentations/`: Contains course presentation materials in Quarto format (.qmd files).
   - `bayesian_inference.qmd`: Statistical Inference II — Bayesian Inference presentation.
@@ -13,6 +14,10 @@ Import the modules as needed in your projects or notebooks. For example:
 
 ```python
 from jacobs_ladder import visualization
+import jacobs_ladder.marketing_kpis as mkpi
+
+# Example: Estimate marketing KPIs
+results = mkpi.estimate_lead_conversions_kpi('data/marketing_data.csv')
 ```
 
 ## Requirements
